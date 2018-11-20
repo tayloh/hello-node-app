@@ -1,16 +1,16 @@
-const http = require('http');
+const express = require("express");
+const path = require("path");
 
-const hostname = '127.0.0.1';
+const app = express()
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-type', 'text/plain');
-    res.end('Hello World\n');
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname + "/assets/html/index.html"))
+    console.log(req.query)
 });
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}`);
+app.listen(port, () => {
+    console.log(`Server running at localhost:${port}`)
 });
 
 // https://hackernoon.com/the-definitive-guide-to-express-the-node-js-web-application-framework-649352e2ae87
